@@ -1,0 +1,8 @@
+{
+    "name": "RabbitMQ",
+    "apiVersion": "3.3",
+    "description": "This is the RabbitMQ management API",
+    "includes": [
+        "overview.json"
+    ]
+}

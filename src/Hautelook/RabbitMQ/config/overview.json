@@ -1,0 +1,10 @@
+{
+    "operations": {
+        "GetOverview": {
+            "httpMethod": "GET",
+            "uri": "/api/overview",
+            "summary": "Retrieves an overview of the service",
+            "responseClass": "Hautelook\\RabbitMQ\\Model\\Overview"
+        }
+    }
+}
