@@ -4,6 +4,8 @@ This library exposes the RabbitMQ Management API to PHP through Guzzle.
 
 [![Build Status](https://travis-ci.org/hautelook/rabbitmq-api.svg)](https://travis-ci.org/hautelook/rabbitmq-api)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hautelook/rabbitmq-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hautelook/rabbitmq-api/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/hautelook/rabbitmq-api/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/hautelook/rabbitmq-api/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/95e7fbd3-7d50-45d0-aefb-84b546723bc2/mini.png)](https://insight.sensiolabs.com/projects/95e7fbd3-7d50-45d0-aefb-84b546723bc2)
 
 ## 1. Installation
 
