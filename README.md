@@ -2,6 +2,8 @@
 
 This library exposes the RabbitMQ Management API to PHP through Guzzle.
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hautelook/rabbitmq-api/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hautelook/rabbitmq-api/?branch=master)
+
 ## 1. Installation
 
 1. Require the package via composer
