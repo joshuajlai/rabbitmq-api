@@ -98,7 +98,7 @@ abstract class AbstractRabbitMQClient
      */
     protected function resolveOptions(array $options)
     {
-        $resolver = new OptionsResolver($options);
+        $resolver = new OptionsResolver();
         $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
