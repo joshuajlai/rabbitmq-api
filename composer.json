@@ -1,6 +1,7 @@
 {
     "name": "hautelook/rabbitmq-api",
     "description": "PHP library to interact with the RabbitMQ API",
+    "keywords": ["RabbitMQ", "Rabbit"],
     "license": "MIT",
     "authors": [
         {
@@ -10,7 +11,8 @@
     ],
     "require": {
         "php": ">= 5.5",
-        "guzzle/guzzle": "~3.9"
+        "guzzle/guzzle": "~3.9",
+        "symfony/options-resolver": "~2.5"
     },
     "autoload": {
         "psr-0": { "Hautelook\\RabbitMQ\\": "src/" }

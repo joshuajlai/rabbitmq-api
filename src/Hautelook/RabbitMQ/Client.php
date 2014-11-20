@@ -3,49 +3,16 @@
 namespace Hautelook\RabbitMQ;
 
 use Guzzle\Http\Exception\ClientErrorResponseException;
-use Guzzle\Service\Client as GuzzleClient;
-use Guzzle\Service\Description\ServiceDescription;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Hautelook\RabbitMQ\Exception\RabbitMQApiException;
+use Hautelook\RabbitMQ\Model\Overview;
 
-class Client 
+class Client extends AbstractRabbitMQClient
 {
-    /**
-     * @var GuzzleClient
-     */
-    protected $client;
-
-    /**
-     * @param string $baseUrl
-     */
-    public function __construct($baseUrl)
-    {
-        $this->client = new GuzzleClient(
-            $baseUrl,
-            [
-                'ssl.certificate_authority' => false,
-                'request.options' => [
-                    'auth' => [
-                        'rabbit',
-                        'hare'
-                    ]
-                ]
-            ]
-        );
-        $this->client->setDescription(ServiceDescription::factory(__DIR__ . '/config/service.json'));
-
-    }
-
-    /**
-     * @param EventSubscriberInterface $plugin
-     */
-    public function addGuzzlePlugin(EventSubscriberInterface $plugin)
-    {
-        $this->client->addSubscriber($plugin);
-    }
-
     /**
      * Gets an overview of the RabbitMQ cluster
      *
+     * @return Overview
+     * @throws RabbitMQApiException
      */
     public function getOverview()
     {
@@ -53,7 +20,10 @@ class Client
         try {
             $result = $command->execute();
         } catch (ClientErrorResponseException $e) {
-//            throw new NotFoundException();
+            throw new RabbitMQApiException(
+                $e->getResponse()->getReasonPhrase(),
+                $e->getResponse()->getStatusCode()
+            );
         }
 
         return $result;

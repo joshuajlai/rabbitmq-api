@@ -149,29 +149,45 @@ class Overview implements ResponseClassInterface
         $overview->setConnectionCount($response['object_totals']['connections']);
         $overview->setChannelCount($response['object_totals']['channels']);
 
-        $overview->setPublishCount($response['message_stats']['publish']);
-        $overview->setPublishRate($response['message_stats']['publish_details']['rate']);
+        if (!empty($response['message_stats']['publish'])) {
+            $overview->setPublishCount($response['message_stats']['publish']);
+            $overview->setPublishRate($response['message_stats']['publish_details']['rate']);
+        }
 
-        $overview->setAckCount($response['message_stats']['ack']);
-        $overview->setAckRate($response['message_stats']['ack_details']['rate']);
+        if (!empty($response['message_stats']['ack'])) {
+            $overview->setAckCount($response['message_stats']['ack']);
+            $overview->setAckRate($response['message_stats']['ack_details']['rate']);
+        }
 
-        $overview->setDeliverGetCount($response['message_stats']['deliver_get']);
-        $overview->setDeliverGetRate($response['message_stats']['deliver_get_details']['rate']);
+        if (!empty($response['message_stats']['deliver_get'])) {
+            $overview->setDeliverGetCount($response['message_stats']['deliver_get']);
+            $overview->setDeliverGetRate($response['message_stats']['deliver_get_details']['rate']);
+        }
 
-        $overview->setRedeliverCount($response['message_stats']['redeliver']);
-        $overview->setRedeliverRate($response['message_stats']['redeliver_details']['rate']);
+        if (!empty($response['message_stats']['redeliver'])) {
+            $overview->setRedeliverCount($response['message_stats']['redeliver']);
+            $overview->setRedeliverRate($response['message_stats']['redeliver_details']['rate']);
+        }
 
-        $overview->setDeliverCount($response['message_stats']['deliver']);
-        $overview->setDeliverRate($response['message_stats']['deliver_details']['rate']);
+        if (!empty($response['message_stats']['deliver'])) {
+            $overview->setDeliverCount($response['message_stats']['deliver']);
+            $overview->setDeliverRate($response['message_stats']['deliver_details']['rate']);
+        }
 
-        $overview->setMessageCount($response['queue_totals']['messages']);
-        $overview->setMessageRate($response['queue_totals']['messages_details']['rate']);
+        if (!empty($response['queue_totals']['messages'])) {
+            $overview->setMessageCount($response['queue_totals']['messages']);
+            $overview->setMessageRate($response['queue_totals']['messages_details']['rate']);
+        }
 
-        $overview->setMessageReadyCount($response['queue_totals']['messages_ready']);
-        $overview->setMessageReadyRate($response['queue_totals']['messages_ready_details']['rate']);
+        if (!empty($response['queue_totals']['messages_ready'])) {
+            $overview->setMessageReadyCount($response['queue_totals']['messages_ready']);
+            $overview->setMessageReadyRate($response['queue_totals']['messages_ready_details']['rate']);
+        }
 
-        $overview->setMessageUnacknowledgedCount($response['queue_totals']['messages_unacknowledged']);
-        $overview->setMessageUnacknowledgedRate($response['queue_totals']['messages_unacknowledged_details']['rate']);
+        if (!empty($response['queue_totals']['messages_unacknowledged'])) {
+            $overview->setMessageUnacknowledgedCount($response['queue_totals']['messages_unacknowledged']);
+            $overview->setMessageUnacknowledgedRate($response['queue_totals']['messages_unacknowledged_details']['rate']);
+        }
 
         return $overview;
     }
