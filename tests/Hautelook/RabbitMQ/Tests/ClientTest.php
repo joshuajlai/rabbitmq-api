@@ -104,11 +104,15 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(in_array($exchangeType->getName(), ExchangeType::getValidExchangeNames()));
         $this->assertTrue($exchangeType->isEnabled());
+        $this->assertNotEmpty($exchangeType->getDescription());
     }
 
     private function verifyConsumer(Consumer $consumer)
     {
         $this->assertStringStartsWith('PHPPROCESS_prod-searchetl', $consumer->getConsumerTag());
+        $this->assertInternalType('bool', $consumer->isAckRequired());
+        $this->assertNotEmpty($consumer->getQueueName());
+        $this->assertNotEmpty($consumer->getQueueVhost());
         $this->assertEquals([], $consumer->getArguments());
         $this->assertTrue($consumer->isAckRequired());
     }
@@ -118,5 +122,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(in_array($listener->getNode(), ['rabbit@seville', 'rabbit@munich']));
         $this->assertTrue(in_array($listener->getProtocol(), Listener::getValidProtocols()));
         $this->assertEquals('::', $listener->getIpAddress());
+        $this->assertInternalType('integer', $listener->getPort());
     }
 }
