@@ -5,6 +5,7 @@ namespace Hautelook\RabbitMQ\Model;
 use Guzzle\Service\Command\OperationCommand;
 use Guzzle\Service\Command\ResponseClassInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 abstract class AbstractRabbitMQModel implements ResponseClassInterface
 {
@@ -14,7 +15,7 @@ abstract class AbstractRabbitMQModel implements ResponseClassInterface
     protected $data = [];
 
     /**
-     * @var PropertyAccess
+     * @var PropertyAccessor
      */
     private $propertyAccessor;
 

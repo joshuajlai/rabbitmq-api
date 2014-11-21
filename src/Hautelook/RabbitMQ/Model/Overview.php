@@ -2,9 +2,6 @@
 
 namespace Hautelook\RabbitMQ\Model;
 
-use Guzzle\Service\Command\OperationCommand;
-use Guzzle\Service\Command\ResponseClassInterface;
-
 /**
  * Not yet implemented:
  * - contexts
