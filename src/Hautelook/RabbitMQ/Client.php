@@ -28,4 +28,19 @@ class Client extends AbstractRabbitMQClient
 
         return $result;
     }
+
+    public function getQueue($vhost, $queueName)
+    {
+        $command = $this->client->getCommand('GetQueue', ['vhost' => $vhost, 'queueName' => $queueName]);
+        try {
+            $result = $command->execute();
+        } catch (ClientErrorResponseException $e) {
+            throw new RabbitMQApiException(
+                $e->getResponse()->getReasonPhrase(),
+                $e->getResponse()->getStatusCode()
+            );
+        }
+
+        return $result;
+    }
 } 

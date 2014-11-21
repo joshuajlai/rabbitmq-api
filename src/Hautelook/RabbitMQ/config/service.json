@@ -3,6 +3,7 @@
     "apiVersion": "3.3",
     "description": "This is the RabbitMQ management API",
     "includes": [
-        "overview.json"
+        "overview.json",
+        "queues.json"
     ]
 }

@@ -12,7 +12,8 @@
     "require": {
         "php": ">= 5.5",
         "guzzle/guzzle": "~3.9",
-        "symfony/options-resolver": "~2.5"
+        "symfony/options-resolver": "~2.5",
+        "symfony/property-access": "~2.5"
     },
     "autoload": {
         "psr-0": { "Hautelook\\RabbitMQ\\": "src/" }

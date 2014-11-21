@@ -1,0 +1,18 @@
+{
+    "operations": {
+        "GetQueue": {
+            "httpMethod": "GET",
+            "uri": "/api/queues/{vhost}/{queueName}",
+            "parameters": {
+                "vhost": {
+                    "location": "uri"
+                },
+                "queueName": {
+                    "location": "uri"
+                }
+            },
+            "summary": "Retrieves a queue ",
+            "responseClass": "Hautelook\\RabbitMQ\\Model\\Queue"
+        }
+    }
+}
