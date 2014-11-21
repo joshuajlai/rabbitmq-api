@@ -5,6 +5,8 @@ namespace Hautelook\RabbitMQ\Tests;
 use Guzzle\Plugin\Mock\MockPlugin;
 use Hautelook\RabbitMQ\Client;
 use Hautelook\RabbitMQ\Model\Consumer;
+use Hautelook\RabbitMQ\Model\ExchangeType;
+use Hautelook\RabbitMQ\Model\Listener;
 use Hautelook\RabbitMQ\Model\Overview;
 use Hautelook\RabbitMQ\Model\Queue;
 
@@ -22,7 +24,44 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Overview::class, $response);
 
+        $this->assertEquals('3.3.5', $response->getManagementVersion());
+        $this->assertEquals('fine', $response->getStatisticsLevel());
+        $this->assertCount(4, $response->getExchangeTypes());
+        foreach ($response->getExchangeTypes() as $exchangeType) {
+            $this->verifyExchangeType($exchangeType);
+        }
+        $this->assertEquals('3.3.5', $response->getRabbitmqVersion());
         $this->assertEquals('rabbit@munich.localdomain', $response->getClusterName());
+        $this->assertEquals('R14B04', $response->getErlangVersion());
+        $this->assertEquals(
+            'Erlang R14B04 (erts-5.8.5) [source] [64-bit] [smp:2:2] [rq:2] [async-threads:30] [kernel-poll:true]',
+            $response->getErlangFullVersion()
+        );
+        $this->assertEquals(1, $response->getMessagesCount());
+        $this->assertEquals(0, $response->getMessagesRate());
+        $this->assertEquals(1, $response->getMessagesReadyCount());
+        $this->assertEquals(0, $response->getMessagesReadyRate());
+        $this->assertEquals(0, $response->getMessagesUnacknowledgedCount());
+        $this->assertEquals(0, $response->getMessagesUnacknowledgedRate());
+
+        $this->assertEquals(1, $response->getPublishedCount());
+        $this->assertEquals(0, $response->getPublishRate());
+        $this->assertEquals(1, $response->getConfirmedCount());
+        $this->assertEquals(0, $response->getConfirmRate());
+
+        $this->assertEquals(0, $response->getConsumerCount());
+        $this->assertEquals(2, $response->getQueueCount());
+        $this->assertEquals(10, $response->getExchangeCount());
+        $this->assertEquals(0, $response->getConnectionCount());
+        $this->assertEquals(0, $response->getChannelCount());
+
+        $this->assertEquals('rabbit@seville', $response->getNodeName());
+        $this->assertEquals('rabbit@munich', $response->getStatisticsNodeName());
+
+        $this->assertCount(6, $response->getListeners());
+        foreach ($response->getListeners() as $listener) {
+            $this->verifyListener($listener);
+        }
     }
 
     public function testGetQueue()
@@ -61,10 +100,23 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1293437, $response->getAckCount());
     }
 
+    private function verifyExchangeType(ExchangeType $exchangeType)
+    {
+        $this->assertTrue(in_array($exchangeType->getName(), ExchangeType::getValidExchangeNames()));
+        $this->assertTrue($exchangeType->isEnabled());
+    }
+
     private function verifyConsumer(Consumer $consumer)
     {
         $this->assertStringStartsWith('PHPPROCESS_prod-searchetl', $consumer->getConsumerTag());
         $this->assertEquals([], $consumer->getArguments());
         $this->assertTrue($consumer->isAckRequired());
+    }
+
+    private function verifyListener(Listener $listener)
+    {
+        $this->assertTrue(in_array($listener->getNode(), ['rabbit@seville', 'rabbit@munich']));
+        $this->assertTrue(in_array($listener->getProtocol(), Listener::getValidProtocols()));
+        $this->assertEquals('::', $listener->getIpAddress());
     }
 }

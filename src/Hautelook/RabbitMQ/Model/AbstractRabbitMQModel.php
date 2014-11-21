@@ -26,7 +26,6 @@ abstract class AbstractRabbitMQModel implements ResponseClassInterface
     public static function fromCommand(OperationCommand $command)
     {
         $response = json_decode($command->getResponse()->getBody(true), true);
-
         $class = get_called_class(); // Cannot do new self() with abstract class
 
         return new $class($response);

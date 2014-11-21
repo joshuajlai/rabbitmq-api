@@ -2,47 +2,39 @@
 
 namespace Hautelook\RabbitMQ\Model;
 
-use Symfony\Component\PropertyAccess\PropertyAccessor;
-
 trait MessagesTrait
 {
-    /**
-     * @return PropertyAccessor
-     */
-    abstract protected function getPropertyAccessor();
+    use AbstractRabbitMQTrait;
 
-    /**
-     * @return array
-     */
-    abstract protected function getData();
+    abstract protected function getMessagesTraitPrefix();
 
     public function getMessagesCount()
     {
-        return $this->getPropertyAccessor()->getValue($this->getData(), '[messages]');
+        return $this->getPropertyAccessor()->getValue($this->getData(), $this->getMessagesTraitPrefix() . '[messages]');
     }
 
     public function getMessagesRate()
     {
-        return $this->getPropertyAccessor()->getValue($this->getData(), '[messages_details][rate]');
+        return $this->getPropertyAccessor()->getValue($this->getData(), $this->getMessagesTraitPrefix() . '[messages_details][rate]');
     }
 
     public function getMessagesReadyCount()
     {
-        return $this->getPropertyAccessor()->getValue($this->getData(), '[messages_ready]');
+        return $this->getPropertyAccessor()->getValue($this->getData(), $this->getMessagesTraitPrefix() . '[messages_ready]');
     }
 
     public function getMessagesReadyRate()
     {
-        return $this->getPropertyAccessor()->getValue($this->getData(), '[messages_ready_details][rate]');
+        return $this->getPropertyAccessor()->getValue($this->getData(), $this->getMessagesTraitPrefix() . '[messages_ready_details][rate]');
     }
 
     public function getMessagesUnacknowledgedCount()
     {
-        return $this->getPropertyAccessor()->getValue($this->getData(), '[messages_unacknowledged]');
+        return $this->getPropertyAccessor()->getValue($this->getData(), $this->getMessagesTraitPrefix() . '[messages_unacknowledged]');
     }
 
     public function getMessagesUnacknowledgedRate()
     {
-        return $this->getPropertyAccessor()->getValue($this->getData(), '[messages_unacknowledged_details][rate]');
+        return $this->getPropertyAccessor()->getValue($this->getData(), $this->getMessagesTraitPrefix() . '[messages_unacknowledged_details][rate]');
     }
 } 

@@ -39,6 +39,12 @@ $overview = $client->getOverview();
 print_r($overview);
 ```
 
+### 2.2 Retrieving a queue
+```php
+$queue = $client->getQueue('/', 'my_queue_name');
+print_r($queue);
+```
+
 ## 3. Running tests
 
 You can run the unit and functional tests for this library by running `phpunit` after installing 

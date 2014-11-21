@@ -101,4 +101,9 @@ class Queue extends AbstractRabbitMQModel
     {
         return $this->getPropertyAccessor()->getValue($this->data, '[node]');
     }
+
+    protected function getMessagesTraitPrefix()
+    {
+        return '';
+    }
 }

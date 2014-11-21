@@ -5,6 +5,7 @@ namespace Hautelook\RabbitMQ;
 use Guzzle\Http\Exception\ClientErrorResponseException;
 use Hautelook\RabbitMQ\Exception\RabbitMQApiException;
 use Hautelook\RabbitMQ\Model\Overview;
+use Hautelook\RabbitMQ\Model\Queue;
 
 class Client extends AbstractRabbitMQClient
 {
@@ -29,6 +30,13 @@ class Client extends AbstractRabbitMQClient
         return $result;
     }
 
+    /**
+     * Gets a queue by queue name and vhost
+     * @param string $vhost
+     * @param string $queueName
+     * @return Queue
+     * @throws RabbitMQApiException
+     */
     public function getQueue($vhost, $queueName)
     {
         $command = $this->client->getCommand('GetQueue', ['vhost' => $vhost, 'queueName' => $queueName]);
