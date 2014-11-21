@@ -110,7 +110,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     private function verifyConsumer(Consumer $consumer)
     {
         $this->assertStringStartsWith('PHPPROCESS_prod-searchetl', $consumer->getConsumerTag());
-        $this->assertInternalType('bool', $consumer->isAckRequired());
+        $this->assertInternalType('bool', $consumer->isExclusive());
+        $this->assertInternalType('integer', $consumer->getPrefetchCount());
         $this->assertNotEmpty($consumer->getQueueName());
         $this->assertNotEmpty($consumer->getQueueVhost());
         $this->assertEquals([], $consumer->getArguments());
